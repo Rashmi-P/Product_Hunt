@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+{% load staticfiles %}
+<head>
+
+  <meta charset="UTF-8">
+  <link rel="shortcut icon" type="image/x-icon" href="https://static.codepen.io/assets/favicon/favicon-8ea04875e70c4b0bb41da869e81236e54394d63638a1ef12fa558a4a835f1164.ico" />
+  <link rel="mask-icon" type="" href="https://static.codepen.io/assets/favicon/logo-pin-f2d2b6d2c61838f7e76325261b7195c27224080bc099486ddd6dccb469b8e8e6.svg" color="#111" />
+  <title>Product Hunt</title>
+  
+  
+  
+  <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'>
+  <link href="{% static 'open-iconic/font/css/open-iconic-bootstrap.css'%}" rel="stylesheet" />
+      <style>
+      body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+main {
+    min-height: 400px;
+    width: 100%;
+    height: 100%;
+    min-width: 600px;
+    background: #fff;
+    padding: 40px 20px;
+    border-radius: 5px;
+    box-shadow: 5px 55px 50px -20px #b6b6b6; 
+}
+
+ul {
+  padding: 0;
+  list-style: none;
+}
+
+
+.twitter {
+  display: flex;
+}
+
+.twitter__bird {
+  margin-left: auto;
+  margin-right: auto/*this will push aside the other flex-items and the bird takes the remaining space!*/
+} 
+
+/*
+  UI cleanups for the twitter navigation. This just makes things look good on the eye 😎
+*/
+
+.twitter {
+  border: 1px solid red;
+  height: 46px;
+  align-items: center;
+  padding: 0 10px;
+  border: 1px solid rgba(238,238,238 ,1);
+  border-radius: 5px;
+  color: rgba(117,117,117 ,1);
+  box-shadow: 5px 10px 20px -20px rgba(85,172,238 ,1);
+}
+.twitter li {
+  cursor: pointer;
+}
+.twitter li:hover{
+  color: rgba(85,172,238 ,1);
+}
+
+
+.twitter li:not(:last-child):not(.twitter__bird) {
+  margin-right: 10px;
+}
+.twitter li  i:not(.fa-twitter):not(.fa-search):not(.fa-user-circle-o) {
+  margin-right: 3px;
+}
+.twitter li > button {
+  font-size: 0.8em;
+  border: 0;
+  background: rgba(85,172,238 ,1);
+  color: #fff;
+  border-radius: 100px;
+}
+
+
+
+
+
+/* ============================
+    Facebook
+   ============================
+*/
+.facebook {
+  display: flex;
+}
+
+.facebook__search {
+  margin-right: auto;
+}
+/*
+  UI cleanups for the facebook navigation. Let's make facebook great again :-) 
+*/
+.facebook {
+  border: 1px solid red;
+  height: 46px;
+  align-items: center;
+  padding: 0 10px;
+  border: 1px solid rgba(238,238,238 ,1);
+  border-radius: 5px;
+  background: rgba(59,89,153 ,1);
+  color: #fff;
+  font-size: 0.9em;
+  box-shadow: 5px 10px 20px -20px rgba(59,89,153 ,1)
+}
+
+.facebook__brand  i{
+  font-size: 1.5em;
+}
+.facebook li:not(:last-child):not(:first-child):not(.facebook__search) {
+  margin-right: 10px;
+}
+
+    </style>
+
+  <script>
+  window.console = window.console || function(t) {};
+</script>
+
+  
+  
+  <script>
+  if (document.location.search.match(/type=embed/gi)) {
+    window.parent.postMessage("resize", "*");
+  }
+</script>
+
+
+</head>
+
+<body translate="no" >
+
+  <main>
+ 
+  <!--facebbok-->
+  <ul class="facebook" role="navigation">
+    <li class="facebook__brand"><i class="fa fa-facebook-official"></i></li>  
+<a class="nav-item nav-link" href="{% url 'home' %}" style="color:white">Product hunt</a> 
+ 	
+   <div class="navbar-nav ml-auto">
+   {% if user.is_authenticated %}
+   <li><a class="nav-item nav-link" href="{% url 'create' %}" style="color:white"><span class="oi oi-plus"></span></a></li>
+   		<li><a class="nav-item nav-link" href="javascript:{document.getElementById('logout').submit()}" style="color:white">Logout</a></li>
+   		<form id="logout" method="POST" action="{% url 'logout' %}">
+   		{% csrf_token %}
+   		<input type="hidden" />
+   		</form>
+   {% else %}
+       <li><a class="nav-item nav-link" href="{% url 'signup' %}" style="color:white">Sign up</a></li>
+	   <li><a class="nav-item nav-link" href="{% url 'login' %}" style="color:white">Log in</a></li>
+	   
+	{% endif %}
+        </div>
+  </ul>
+  
+           
+      {% block content %}
+      
+      {% endblock %}
+      
+      
+<!--   <nav>Github</nav>
+  <nav>Medium</nav> -->
+</main>
+    <script src="https://static.codepen.io/assets/common/stopExecutionOnTimeout-de7e2ef6bfefd24b79a3f68b414b87b8db5b08439cac3f1012092b2290c719cd.js"></script>
+
+
+  
+
+    <script id="rendered-js" >
+      /*
+ I hope this "over-commenting helps ya! 
+ 
+ Curious how I built this? Read the article here => => => https://medium.com/flexbox-and-grids/the-most-popular-navigation-bars-created-with-flexbox-6c0f59f55686
+ 
+ 1. For simplicity, I am using font awesome. Thus, some icons may not be the exact same ones you see on twitter/facebook/github/medium
+ 
+ 2. For simplicity, I have also avoided mobile displays of these navigation bars. Feel free to fork and do for mobile. It'll be fun :-) 
+*/
+      //# sourceURL=pen.js
+    </script>
+
+
+
+  
+  
+
+  <script src="https://static.codepen.io/assets/editor/live/css_reload-5619dc0905a68b2e6298901de54f73cefe4e079f65a75406858d92924b4938bf.js"></script>
+</body>
+
+</html>
+
+      
